@@ -1,4 +1,4 @@
 MaLTE-aux
 =========
 
-Auxiliary scripts for MaLTE
+Auxiliary data and scripts for MaLTE
