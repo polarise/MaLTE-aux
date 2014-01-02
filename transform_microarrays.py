@@ -3,8 +3,8 @@
 #	combine_microarrays.py
 
 #	Transform a Affymetrix Human Exon 1.0 ST array or Human Gene 1.0 array
-# into a Human Gene 1.1 array for application to MaLTE using GTEx training data
-# It requires several resource files to run. Please 
+# 	into a Human Gene 1.1 array for application to MaLTE using GTEx training data
+# 	It requires several resource files to run supplied with it.
 
 #	Copyright (C) 2013  Paul K. Korir
 
@@ -25,6 +25,7 @@ from __future__ import division
 import sys
 import argparse
 import random
+import gzip
 
 comment = [ "#" ] 	# comments
 header = [ "p", "A" ]	# header markers
@@ -117,7 +118,7 @@ class ProbesetDetailFile( object ):
 	
 	def parse( self ):
 		print >> sys.stderr, "Reading probe details from %s ..." % self.name,
-		with open( self.name ) as f:
+		with gzip.open( self.name, 'rb' ) as f:
 			for row in f:
 				if row[0] in comment: continue
 				if row[0] in header: continue
@@ -166,7 +167,7 @@ if __name__ == "__main__":
 	# get the map between probe sets
 	print >> sys.stderr, "Building map of HuGe metaprobesets to HuEx metaprobesets ...",
 	metaprobeset_map = dict()
-	with open( cmp_fn ) as f:
+	with gzip.open( cmp_fn, 'rb' ) as f:
 		for row in f:
 			if row[0] in header: continue
 			L = row.strip().split( "\t" )
@@ -179,7 +180,7 @@ if __name__ == "__main__":
 	# get the map between mps and ps
 	print >> sys.stderr, "Building map of HuEx metaprobesets to probesets ...",
 	huex_metaprobesets = dict()
-	with open( huex_mps_fn ) as f:
+	with gzip.open( huex_mps_fn, 'rb' ) as f:
 		for row in f:
 			if row[0] in comment or row[0] in header: continue
 			L = row.strip().split( "\t" )
@@ -188,7 +189,7 @@ if __name__ == "__main__":
 	
 	print >> sys.stderr, "Building map of HuGe metaprobesets to probesets ...",
 	huge_metaprobesets = dict()
-	with open( huge_mps_fn ) as f:
+	with gzip.open( huge_mps_fn, 'rb' ) as f:
 		for row in f:
 			if row[0] in comment or row[0] in header: continue
 			L = row.strip().split( "\t" )
@@ -231,9 +232,9 @@ if __name__ == "__main__":
 	huex_det = ProbesetDetailFile( huexde_fn )
 	huge_det = ProbesetDetailFile( hugede_fn )
 	
-	of1 = open( huge_out_fn, 'w' )
-	of2 = open( huex_out_fn, 'w' )
-	of3 = open( "huex_probes.txt", 'w' )
+	of1 = gzip.open( huge_out_fn, 'wb' )
+	of2 = gzip.open( huex_out_fn, 'wb' )
+	of3 = gzip.open( "huex_probes.txt", 'wb' )
 	
 	print >> of1, huge_int.header
 	print >> of2, huex_int.header

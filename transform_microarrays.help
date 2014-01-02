@@ -1,0 +1,15 @@
+# HuEx1.0 and HuGe1.1
+# retinitis pigmentosa data
+./transform_microarrays.py \
+# extracted used apt-cel-extract
+-e /path/to/exon_array_probe_intensities.txt \ 
+# ditto
+-g /path/to/gene_array_probe_intensities.txt \ 
+-c HuExVsHuGene_BestMatch.txt.gz \
+-i HuGene-1_1-st-v1.r4.pgf.txt.gz \
+-f HuEx-1_0-st-v2.r2.pgf.txt.gz \
+-p HuEx-1_0-st-v2.r2.dt1.hg18.full.mps.gz \
+-q HuGene-1_0-st-v1.r4.mps.gz \
+# new probes
+--huex-out BestMatch_HuEx_probe_intensities.txt \ 
+--huge-out BestMatch_HuGe_probe_intensities.txt
