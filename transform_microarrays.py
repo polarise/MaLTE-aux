@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#	combine_microarrays.py
+#	transform_microarrays.py
 
 #	Transform a Affymetrix Human Exon 1.0 ST array or Human Gene 1.0 array
 # 	into a Human Gene 1.1 array for application to MaLTE using GTEx training data
