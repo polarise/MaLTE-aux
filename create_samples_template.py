@@ -51,7 +51,7 @@ if __name__ == "__main__":
 	with open( train_fn ) as f:
 		all_train_samples = [ pair.strip() for pair in f ]
 
-	print( all_train_samples )
+	#print( all_train_samples )
 	
 	if test_fn != None:
 		with open( test_fn ) as f:
