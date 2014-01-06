@@ -28,7 +28,9 @@ import random
 def pick_random_samples( list_samples, no_samples ):
 	picked_samples = list()
 	while len( picked_samples ) < no_samples:
-		picked_samples.append( random.choice( list_samples ))
+		random_choice = random.choice( list_samples )
+		picked_samples.append( random_choice )
+		list_samples.remove( random_choice )
 	
 	return picked_samples
 
